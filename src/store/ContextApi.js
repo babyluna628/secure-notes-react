@@ -30,6 +30,7 @@ export const ContextProvider = ({ children }) => {
 
     if (user?.username) {
       try {
+        //서버에 현재 유저정보를 요청
         const { data } = await api.get(`/auth/user`);
         const roles = data.roles;
 
@@ -48,14 +49,14 @@ export const ContextProvider = ({ children }) => {
     }
   };
 
-  //if  token exist fetch the current user
+  //처음 시작시 또는 토큰이 바뀔때마다  유저정보를 가져옴
   useEffect(() => {
     if (token) {
       fetchUser();
     }
   }, [token]);
 
-  //through context provider you are sending all the datas so that we access at anywhere in your application
+  //컨텍스트프로바이더가 value 의 모든 정보를 모든 컴포넌트에 제공함
   return (
     <ContextApi.Provider
       value={{
@@ -74,7 +75,7 @@ export const ContextProvider = ({ children }) => {
   );
 };
 
-//by using this (useMyContext) custom hook we can reach our context provier and access the datas across our components
+//useMyContext로
 export const useMyContext = () => {
   const context = useContext(ContextApi);
 
