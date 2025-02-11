@@ -20,7 +20,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   // 컨텍스트로 토큰 가져옴
   const { setToken, token } = useMyContext();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); //이동객체
 
   //react hook form initialization
   const {
@@ -37,6 +37,7 @@ const Login = () => {
     mode: "onTouched",
   });
 
+  //로그인성공시
   const handleSuccessfulLogin = (token, decodedToken) => {
     const user = {
       username: decodedToken.sub,
@@ -45,10 +46,10 @@ const Login = () => {
     localStorage.setItem("JWT_TOKEN", token);
     localStorage.setItem("USER", JSON.stringify(user));
 
-    //store the token on the context state  so that it can be shared any where in our application by context provider
+    //토큰을 컨텍스트에 저장
     setToken(token);
 
-    navigate("/notes");
+    navigate("/notes"); //노트 페이지로감
   };
 
   //function for handle login with credentials
@@ -58,9 +59,9 @@ const Login = () => {
       const response = await api.post("/auth/public/signin", data);
 
       //showing success message with react hot toast
-      toast.success("Login Successful");
+      toast.success("로그인 성공");
 
-      //reset the input field by using reset() function provided by react hook form after submission
+      //입력창 리셋
       reset();
 
       if (response.status === 200 && response.data.jwtToken) {
@@ -68,20 +69,18 @@ const Login = () => {
         const decodedToken = jwtDecode(response.data.jwtToken);
         handleSuccessfulLogin(response.data.jwtToken, decodedToken);
       } else {
-        toast.error(
-          "Login failed. Please check your credentials and try again."
-        );
+        toast.error("실패!!!!!!!!!!!!!!!!!!비번아디화긴!!!!!!");
       }
     } catch (error) {
       if (error) {
-        toast.error("Invalid credentials");
+        toast.error("로긴 실패 에러 발생");
       }
     } finally {
       setLoading(false);
     }
   };
 
-  //if there is token  exist navigate  the user to the home page if he tried to access the login page
+  //토큰이 있으면 홈페이지로 감 (로그인 생략 필요없음)
   useEffect(() => {
     if (token) navigate("/");
   }, [navigate, token]);
