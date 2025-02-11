@@ -7,17 +7,19 @@ import State from "./LandingPageCom/State";
 import Testimonial from "./LandingPageCom/Testimonial/Testimonial";
 import { useMyContext } from "../store/ContextApi";
 
+//위에서 내려오는 애니메이션
 const fadeInFromTop = {
   hidden: { opacity: 0, y: -50 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
+//밑에서 올라오는 애니메이션
 const fadeInFromBotom = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
 const LandingPage = () => {
-  // Access the token  state by using the useMyContext hook from the ContextProvider
+  //컨텍스트에서 토큰 가져옴
   const { token } = useMyContext();
 
   return (
@@ -27,9 +29,22 @@ const LandingPage = () => {
           className="font-montserrat uppercase text-headerColor  xl:text-headerText md:text-4xl text-2xl mx-auto text-center font-bold sm:w-[95%] w-full"
           initial="hidden"
           animate="visible"
-          variants={fadeInFromTop}
+          variants={{
+            hidden: { opacity: 0, y: -100, scale: 0.5 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                type: "spring",
+                stiffness: 120,
+                damping: 6,
+                mass: 1,
+                bounce: 0.5,
+              },
+            },
+          }}
         >
-          Turn your thoughts into secure, organized notes And Faster.
+          루나는 멍멍이 노트 작성중
         </motion.h1>
         <h3 className="text-logoText md:text-2xl text-xl font-semibold text-slate-800 text-center">
           The #1 secure note-taking app.
