@@ -5,12 +5,12 @@ import NoteItems from "./NoteItems";
 import { FiFilePlus } from "react-icons/fi";
 import { Blocks } from "react-loader-spinner";
 import Errors from "../Errors";
-
+//유저의 모든 노트들을 표시
 const AllNotes = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
+  //유저의 노트들을 서버에서 가져옴
   const fetchNotes = async () => {
     setLoading(true);
     try {
@@ -18,7 +18,7 @@ const AllNotes = () => {
 
       const parsedNotes = response.data.map((note) => ({
         ...note,
-        parsedContent: JSON.parse(note.content).content, // Assuming each note's content is JSON-formatted.
+        parsedContent: JSON.parse(note.content).content, // 제이슨문자열을 변환해서 안의 내용만 가져옴
       }));
       setNotes(parsedNotes);
     } catch (error) {

@@ -8,19 +8,20 @@ import Buttons from "../../utils/Buttons";
 import toast from "react-hot-toast";
 
 const CreateNote = () => {
-  const navigate = useNavigate();
-  //set the content of the reactquill
+  const navigate = useNavigate(); //네비객체
+  //리액트퀄의 입력내용 관리
   const [editorContent, setEditorContent] = useState("");
   const [loading, setLoading] = useState(false);
-
+  //console.log(editorContent); 콘솔로 어떻게 저장되는지 봄
+  //에디터의 내용이 바뀌면 그내용을 에디터컨텐트에 저장함
   const handleChange = (content, delta, source, editor) => {
     setEditorContent(content);
   };
 
-  //note create handler
+  //제출 버튼을 누르면 에디터내용을 서버로 보내 저장함
   const handleSubmit = async () => {
     if (editorContent.trim().length === 0) {
-      return toast.error("Note content is required");
+      return toast.error("내용을 적어주세요"); //에디터 선택하면 내용으로 취급됨
     }
     try {
       setLoading(true);
@@ -64,6 +65,14 @@ const CreateNote = () => {
                 { indent: "-1" },
                 { indent: "+1" },
               ],
+
+              [
+                {
+                  color: [],
+                },
+                { background: [] },
+              ],
+
               ["clean"],
             ],
           }}
