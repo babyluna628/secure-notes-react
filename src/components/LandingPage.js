@@ -19,7 +19,7 @@ const fadeInFromBotom = {
 };
 
 const LandingPage = () => {
-  //컨텍스트에서 토큰 가져옴
+  // 컨텍스트에서 토큰 가져옴
   const { token } = useMyContext();
 
   return (
@@ -29,22 +29,9 @@ const LandingPage = () => {
           className="font-montserrat uppercase text-headerColor  xl:text-headerText md:text-4xl text-2xl mx-auto text-center font-bold sm:w-[95%] w-full"
           initial="hidden"
           animate="visible"
-          variants={{
-            hidden: { opacity: 0, y: -100, scale: 0.5 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: {
-                type: "spring",
-                stiffness: 120,
-                damping: 6,
-                mass: 1,
-                bounce: 0.5,
-              },
-            },
-          }}
+          variants={fadeInFromTop}
         >
-          루나는 멍멍이 노트 작성중
+          누구든지 원하는 노트를 작성해 보세요!
         </motion.h1>
         <h3 className="text-logoText md:text-2xl text-xl font-semibold text-slate-800 text-center">
           The #1 secure note-taking app.
@@ -77,12 +64,12 @@ const LandingPage = () => {
             <>
               <Link to="/login">
                 <Buttons className="sm:w-52 w-44 bg-customRed font-semibold hover:scale-105 transition-all duration-200 cursor-pointer text-white px-10 py-3 rounded-sm">
-                  SignIn
+                  로그인
                 </Buttons>
               </Link>
               <Link to="/signup">
                 <Buttons className="sm:w-52 w-44 bg-btnColor font-semibold hover:scale-105 transition-all duration-200 cursor-pointer text-white px-10 py-3 rounded-sm">
-                  SignUp
+                  가입하기
                 </Buttons>
               </Link>
             </>

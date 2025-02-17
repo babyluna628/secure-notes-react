@@ -17,7 +17,7 @@ import moment from "moment";
 import Errors from "../Errors";
 
 const UserProfile = () => {
-  // 컨텍스트로 토큰과 유저정보를 가져옴
+  // 컨텍스트로 토큰과 유저정보 가져옴.
   const { currentUser, token } = useMyContext();
   //set the loggin session from the token
   const [loginSession, setLoginSession] = useState(null);
